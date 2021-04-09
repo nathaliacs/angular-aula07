@@ -1,0 +1,45 @@
+<hello name="{{ name }}"></hello>
+<hr>
+<h2>Repositorio do GitHub</h2>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Link</th>
+  </tr>
+  <tr *ngFor="let repo of gitHubService.repos">
+    <td>{{repo.id}}</td>
+    <td>{{repo.full_name}}</td>
+  </tr>
+
+</table>
+
+<hr>
+
+<h2>BitCoin$ &nbsp;
+  <button (click)="updateBitCoinRates()">Atualizar</button>
+</h2>
+
+<div>
+  <div *ngIf="bitcoinService.currentResponse">
+    {{bitcoinService.currentResponse.time.updated}}
+  </div>
+
+  <div *ngIf="bitcoinService.currentResponse">
+    <span [innerHTML]="bitcoinService.currentResponse.bpi.USD.symbol"></span>
+    {{bitcoinService.currentResponse.bpi.USD.rate}}
+
+  </div>
+</div>
+
+<table border="1">
+  <tr>
+    <th>Data / Hora</th>
+    <th>Taxa USD</th>
+    <th>Taxa EUR</th>
+  </tr>
+  <tr *ngFor="let response of this.bitcoinService.updateList">
+    <th>{{response.time.updated}}</th>
+    <th>{{response.bpi.USD.rate}}</th>
+    <th>{{response.bpi.EUR.rate}}</th>
+  <tr>
+</table>
